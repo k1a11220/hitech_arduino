@@ -21,6 +21,11 @@ void setup() {
 
 void loop() {
   analogWrite(one, ledState);
+  analogWrite(two, ledState - 30);
+  analogWrite(three, ledState - 60);
+  analogWrite(four, ledState - 90);
+  analogWrite(five, ledState - 120);
+
   ledState = ledState + ledAmount;
 
   if(ledState <= 0 || ledState >= 255) {
