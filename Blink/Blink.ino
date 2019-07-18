@@ -1,20 +1,17 @@
 //변수
 //char blueLedPin = 9;
-#define one 2
-#define two 3
-#define three 4
-#define four 5
-#define five 6
+#define one 3
+#define two 5
+#define three 6
+#define four 10
+#define five 11
 
-unsigned char blueLedCnt = 0;
-unsigned char redLedCnt = 0;
-unsigned char blueOff = 12;
-unsigned char redOff = 13;
-unsigned char blueLedState = 0;
-unsigned char redLedState = 0;
+unsigned char ledCnt = 10;
+unsigned char ledOff = 0;
+unsigned char ledState = 0;
+char ledAmount = 5;
 
-void setup()
-{
+void setup() {
   pinMode(one, OUTPUT);
   pinMode(two, OUTPUT);
   pinMode(three, OUTPUT);
@@ -23,38 +20,58 @@ void setup()
 }
 
 void loop() {
-  if (blueLedCnt >= 30)
-  {
-    blueLedCnt = 0;
-    digitalWrite(BLUE_LED_PIN, blueLedState);
-  }
+  analogWrite(one, ledState);
+  ledState = ledState + ledAmount;
 
-  else
-  {
-    digitalWrite(BLUE_LED_PIN, 1);
+  if(ledState <= 0 || ledState >= 255) {
+    ledAmount = -ledAmount;
   }
-
-  if (blueLedCnt == 17)
-  {
-    blueLedCnt = 0;
-  }
-
-  if (redLedCnt >= 5)
-  {
-    redLedCnt = 0;
-    digitalWrite(GREEN_LED_PIN, redLedState);
-  }
-
-  else
-  {
-    digitalWrite(GREEN_LED_PIN, 1);
-  }
-  if (blueLedCnt == 21)
-  {
-    blueLedCnt = 0;
-  }
-
-  blueLedCnt++;
-  redLedCnt++;
-  delay(1);
+  delay(30);
 }
+
+/*
+  digitalWrite(one, 1);
+  delay(1000);
+  digitalWrite(two, 1);
+  delay(1000);
+  digitalWrite(three, 1);
+  delay(1000);
+  digitalWrite(four, 1);
+  delay(1000);
+  digitalWrite(five, 1);
+  delay(1000);
+  digitalWrite(one, 0);
+  delay(1000);
+  digitalWrite(two, 0);
+  delay(1000);
+  digitalWrite(three, 0);
+  delay(1000);
+  digitalWrite(four, 0);
+  delay(1000);
+  digitalWrite(five, 0);
+  delay(1000); 
+    if(ledCnt == 0) {
+    ledCnt = 10;
+  }
+
+  if(ledOff == 10) {
+    ledOff = 0;
+  }
+
+  digitalWrite(one, !ledState);
+  delay(ledCnt);
+  digitalWrite(one, ledState);
+  delay(ledOff);
+  ledCnt--;
+  ledOff++;
+  delay(10); 
+
+  analogWrite(one, ledState);
+  ledState = ledState + ledAmount;
+
+  if(ledState <= 0 || ledState >= 255) {
+    ledAmount = -ledAmount;
+  }
+  delay(30);
+
+  */
