@@ -8,7 +8,7 @@
 
 unsigned char ledCnt = 10;
 unsigned char ledOff = 0;
-unsigned char ledState = 0;
+char ledState = 0;
 char ledAmount = 5;
 
 void setup() {
