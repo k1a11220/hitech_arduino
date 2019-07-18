@@ -2,18 +2,38 @@
 #define yellowLed A1
 #define blueLed A2
 
-int on = 1;
-int currentBtn = LOW;
-int lastBtn = LOW;
-int ledOn = false;
-int btnCnt = 0;
+int switchValue = 0;
+int switchCnt = 0;
+
 
 void setup() {
-
+    pinMode(blueLed, OUTPUT);
+    pinMode(7, INPUT);
+    pinMode(redLed, OUTPUT);
 }
 
 void loop() {
+    switchValue = digitalRead(7);
 
+    if(switchValue == 1) {
+        switchCnt++;
+        Serial.println("Click");
+        digitalWrite(blueLed, 1);
+    } else {
+        digitalWrite(redLed, 0);
+        digitalWrite(blueLed, 0);
+    }
+    
+    if(switchCnt >= 6) {
+        switchCnt = 0;
+        Serial.println("Long Click");
+        digitalWrite(redLed, 1);
+        digitalWrite(blueLed, 0);
+    } else {
+        digitalWrite(blueLed, 0);
+    }
+    
+    delay(100);
 }
 
 /*
