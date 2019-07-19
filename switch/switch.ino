@@ -4,12 +4,13 @@
 
 int switchValue = 0;
 int switchCnt = 0;
-
+int switchSec = 0;
 
 void setup() {
     pinMode(blueLed, OUTPUT);
     pinMode(7, INPUT);
     pinMode(redLed, OUTPUT);
+    Serial.begin(9600);
 }
 
 void loop() {
@@ -17,15 +18,19 @@ void loop() {
 
     if(switchValue == 1) {
         switchCnt++;
-        Serial.println("Click");
-        digitalWrite(blueLed, 1);
     } else {
         digitalWrite(redLed, 0);
         digitalWrite(blueLed, 0);
     }
-    
-    if(switchCnt >= 6) {
-        switchCnt = 0;
+
+    if(switchCnt == 1) {
+        switchCnt == 0;
+        switchSec++;
+        Serial.println("Click");
+    }
+
+    if(switchSec >= 10) {
+        switchSec = 0;
         Serial.println("Long Click");
         digitalWrite(redLed, 1);
         digitalWrite(blueLed, 0);
